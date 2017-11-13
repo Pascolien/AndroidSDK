@@ -601,12 +601,13 @@ class TradeItLinkedBrokerManagerSpec extends Specification {
 
             TradeItLinkedLoginParcelable linkedLogin = Mock(TradeItLinkedLoginParcelable.class)
             linkedLogin.userId = myUserId
+            linkedLogin.userToken = myUserToken
 
             TradeItLinkedBrokerParcelable linkedBroker = Mock(TradeItLinkedBrokerParcelable.class)
             1 * linkedBroker.getBrokerName() >> "My broker 1"
-            1 * linkedBroker.getLinkedLogin() >> linkedLogin
+            2 * linkedBroker.getLinkedLogin() >> linkedLogin
 
-            1 * apiClient.getOAuthLoginPopupUrlForTokenUpdate("My broker 1", myUserId, "my internal app callback", _) >> { broker, userId, userToken,  TradeItCallback<String> callback ->
+            1 * apiClient.getOAuthLoginPopupUrlForTokenUpdate("My broker 1", myUserId, myUserToken, "my internal app callback", _) >> { broker, userId, userToken, deepLinkCallback,  TradeItCallback<String> callback ->
                 callback.onSuccess(mySpecialUrl);
             }
 
@@ -642,11 +643,12 @@ class TradeItLinkedBrokerManagerSpec extends Specification {
 
             TradeItLinkedLoginParcelable linkedLogin = Mock(TradeItLinkedLoginParcelable.class)
             linkedLogin.userId = myUserId
+            linkedLogin.userToken = myUserToken
 
             TradeItLinkedBrokerParcelable linkedBroker = Mock(TradeItLinkedBrokerParcelable.class)
             1 * linkedBroker.getBrokerName() >> "My broker 1"
-            2 * linkedBroker.getLinkedLogin() >> linkedLogin
-            1 * apiClient.getOAuthLoginPopupUrlForTokenUpdate("My broker 1", myUserId, "my internal app callback", _) >> { broker, userId, userToken,  TradeItCallback<String> callback ->
+            3 * linkedBroker.getLinkedLogin() >> linkedLogin
+            1 * apiClient.getOAuthLoginPopupUrlForTokenUpdate("My broker 1", myUserId, myUserToken, "my internal app callback", _) >> { broker, userId, userToken,  deepLinkCallback, TradeItCallback<String> callback ->
                 callback.onSuccess(mySpecialUrl);
             }
             this.linkedBrokerManager.linkedBrokers  = [linkedBroker]
