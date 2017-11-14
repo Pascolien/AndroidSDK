@@ -62,7 +62,7 @@ public class MainActivityTest {
         testOauthFlow("dummy");
         testGetLinkedBrokers(1);
         testAuthenticateFirstLinkedBroker();
-        testGetBalancesFirstLinkedBroker();
+//        testGetBalancesFirstLinkedBroker();
         testPositionsFirstLinkedBrokerAccount();
         testPreviewAndPlaceTradeFirstLinkedBrokerAccount();
         testDeleteAllLinkedBrokers();
@@ -203,15 +203,15 @@ public class MainActivityTest {
         navigateUp();
     }
 
-    private void testGetBalancesFirstLinkedBroker() throws InterruptedException {
-        tapOnText("Get balances for first linked broker account");
-
-        Thread.sleep(1000l); //TODO there should be a better way for waiting
-
-        checkFieldContainsText(R.id.account_overview_textview, "TradeItBalanceParcelable{availableCash=1204.06, buyingPower=2408.12, dayAbsoluteReturn=78.42, dayPercentReturn=3.25, totalAbsoluteReturn=14486.67, totalPercentReturn=22.84, totalValue=76489.23}");
-
-        navigateUp();
-    }
+//    private void testGetBalancesFirstLinkedBroker() throws InterruptedException {
+//        tapOnText("Get balances for first linked broker account");
+//
+//        Thread.sleep(1000l); //TODO there should be a better way for waiting
+//
+//        checkFieldContainsText(R.id.account_overview_textview, "TradeItBalanceParcelable{availableCash=1204.06, buyingPower=2408.12, dayAbsoluteReturn=78.42, dayPercentReturn=3.25, totalAbsoluteReturn=14486.67, totalPercentReturn=22.84, totalValue=76489.23}");
+//
+//        navigateUp();
+//    }
 
     private void testPositionsFirstLinkedBrokerAccount() throws InterruptedException {
         tapOnText(MainActivity.MainActivityActions.GET_POSITIONS_FIRST_LINKED_BROKER_ACCOUNT.getLabel());
